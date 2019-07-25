@@ -1,0 +1,26 @@
+
+arch:
+  - amd64
+  - arm64
+  - armel
+  - armhf
+  - i386
+  - mips
+  - mips64el
+  - mipsel
+  - ppc64el
+  - s390x
+  - udeb-amd64
+  - udeb-arm64
+  - udeb-armel
+  - udeb-armhf
+  - udeb-i386
+  - udeb-mips
+  - udeb-mips64el
+  - udeb-mipsel
+  - udeb-ppc64el
+  - udeb-s390x
+
+repo:
+  url: "http://ftp.uk.debian.org/debian/dists/stable/main/"
+
