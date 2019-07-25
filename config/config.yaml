@@ -24,3 +24,9 @@ arch:
 repo:
   url: "http://ftp.uk.debian.org/debian/dists/stable/main/"
 
+downloadFolder: "download"
+
+statistics:
+  path: "statistics"
+  cache: "cache"
+  prefix: "statistics_"

@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db834c43-bb23-43d1-9ae0-0e94f93e1639" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/emacs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/package_statistics.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/download/Contents-amd64" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/download/Contents-amd64.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/download/Contents-amd64_small" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/package_statistics.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package_statistics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/statistics/statistics_Contents-amd64.gz_20190723_180305" afterDir="false" />
+    <list default="true" id="db834c43-bb23-43d1-9ae0-0e94f93e1639" name="Default Changelist" comment="Added Caching">
+      <change afterPath="$PROJECT_DIR$/lib/file_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/package_statistics.sh" beforeDir="false" afterPath="$PROJECT_DIR$/lib/package_statistics.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package_statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/package_statistics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/statistics/statistics_Contents-amd64.gz_20190723_180305" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,6 +29,7 @@
   <component name="ProjectId" id="1OSzwcHgJOpAZmfe1pVaU6Qw0jV" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -116,6 +107,12 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Added Caching" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Caching" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

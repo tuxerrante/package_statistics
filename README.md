@@ -9,3 +9,4 @@
 
 ## TODO
 - double engine: Python and Bash
+- a lot of ugly hardcoded code should be cleaned

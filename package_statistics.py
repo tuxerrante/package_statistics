@@ -5,14 +5,15 @@ import argparse
 import os
 import subprocess
 import sys
-from matplotlib import pyplot as plt
-import numpy as np
-from datetime import datetime
+
 import yaml
+from matplotlib import pyplot as plt
 
 # ------ GLOBAL VARS ------
+from lib import file_utils
+
 cmdargs = None
-CONFIG = None
+# CONFIG = None
 # ------
 
 
@@ -43,7 +44,8 @@ class File:
     name = None
     archive_name = None
     statistics = ""
-    last_update_date = ""
+    last_update_date = None
+    creation_date = None
 
     def __init__(self):
         self.arch = cmdargs.arch
@@ -52,7 +54,10 @@ class File:
         self.archive_name   = self.name + ".gz"
         self.file_directory = "download"
         self.statistics     = ""
-        self.last_update_date    = os.path.getmtime(os.path.join(self.file_directory,self.archive_name))
+        self.last_update_date = None
+
+    def get_creation_date(self):
+        return self.creation_date
 
     def get_last_update_date(self):
         return self.last_update_date
@@ -69,6 +74,18 @@ class File:
     def get_stats(self):
         return self.statistics
 
+    def get_name(self):
+        return self.name
+
+    def set_archive_name(self, an):
+        self.archive_name = an
+
+    def set_name(self, n):
+        self.name = n
+
+    def set_creation_date(self, cd):
+        self.creation_date = cd
+
     def compute_stats(self, engine):
         """ Based on the type of engine it will compute the stats for the file
             bash: will run a fast external script, located in the lib folder
@@ -76,7 +93,7 @@ class File:
         :return: the statistics as a string
         """
         if engine == 'bash':
-            file_path = "./" + self.file_directory + "/" + self.name + "_small"
+            file_path = self.name
             command = ["./lib/package_statistics.sh", file_path]
             bash_child = subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 
@@ -90,12 +107,6 @@ class File:
 
         return self.statistics
 
-    def download_file(arch, filename):
-        """ download the given file from the repo
-        :param filename
-        :return:
-        """
-        pass
 
 
 
@@ -112,13 +123,18 @@ def plot_results(stats_file):
 
 
 def store_stats(contentsFile):
-    last_update_date = datetime.fromtimestamp(contentsFile.get_last_update_date())\
-                        .strftime("%Y%m%d_%H%M%S")
-    filename = contentsFile.get_archive_name()
-    out_file_name = os.path.join("statistics","statistics_" + filename +"_"+ last_update_date)
+    """
+    Repo time format:
+        last modified date: 03-Jul-2019 14:16
+        creation date:
+    :param contentsFile:
+    :return:
+    """
+    filename = contentsFile.get_name().split("/")[1]
+    out_file_name = os.path.join(CONFIG["statistics"]["path"], CONFIG["statistics"]["prefix"] + filename)
 
     # print(" Last modification of the archive file "+ filename +": "+ last_update_date)
-    # TODO: csv
+    # TODO: plots/csv
     with open(out_file_name, mode='w') as f:
         f.write(contentsFile.get_stats())
 
@@ -131,9 +147,29 @@ if __name__ == '__main__':
     print(" Architecture was set to " + contentsFile.get_arch())
     print(" Repository URL is: " + contentsFile.get_url())
 
+    # check repo metadata to avoid downloading the same file twice
+    stats_file = file_utils.check_remote_file(contentsFile)
+
+    if stats_file:
+        print(" The stats are already computed: ")
+        with open(stats_file) as f:
+            for line in f:
+                print(line, end='')
+        sys.exit()
+
+    print(" Downloading file "+ contentsFile.get_name() +" ..")
+    file_utils.download_file(contentsFile)
+    print(" File downloaded")
+
+    print(" File extraction in progress..")
+    file_utils.extract_archive(contentsFile)
+    print(" Extraction ended.")
+
+    print(" Computing statistics, this may take a minute..")
     stats = contentsFile.compute_stats(cmdargs.engine)
 
     store_stats(contentsFile)
+    print(" Statistics are stored in "+ CONFIG["statistics"]["path"] + " folder")
 
     print("\n Here the 10 most used packages for the file: " + contentsFile.name \
           + "\n-----------------------------"\

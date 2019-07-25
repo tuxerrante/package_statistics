@@ -1,13 +1,10 @@
 #!/bin/bash
-
 # take a unique pkg list from the second column
 #	awk '{print $2}' $1
 # split on "," but not on / 
 # 	egrep -o "[/a-zA-Z0-9_-]+"
 # remove repetitions, case insensitive
 # 	sort | uniq -cdi
-
-# head -n 100 Contents-amd64_small | awk '{print $2}' | egrep -o "[/a-zA-Z0-9_-]+" | sort | uniq -cdi | sort -nr | awk '{print $2 " " $1}'
 
 awk '{print $2}' $1 | egrep -o "[/.a-zA-Z0-9_-]+" | sort | uniq -cdi | sort -nr | awk 'BEGIN{i=0} { if (i<10){ print $2 "\t" $1; i++;} }'
 
