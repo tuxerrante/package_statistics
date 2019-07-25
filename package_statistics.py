@@ -139,6 +139,18 @@ def store_stats(contentsFile):
         f.write(contentsFile.get_stats())
 
 
+def print_results(stats, isFile=False):
+    print("\n Here the 10 most used packages for the file: " + contentsFile.name \
+          + "\n----------------------------------------")
+    if isFile:
+        with open(stats_file) as f:
+            for line in f:
+                print(line, end='')
+    else:
+        print(stats)
+
+
+
 if __name__ == '__main__':
     print
     define_arguments()
@@ -151,10 +163,8 @@ if __name__ == '__main__':
     stats_file = file_utils.check_remote_file(contentsFile)
 
     if stats_file:
-        print(" The stats are already computed: ")
-        with open(stats_file) as f:
-            for line in f:
-                print(line, end='')
+        print(" The stats are already computed! ")
+        print_results(stats_file, True)
         sys.exit()
 
     print(" Downloading file "+ contentsFile.get_name() +" ..")
@@ -169,11 +179,13 @@ if __name__ == '__main__':
     stats = contentsFile.compute_stats(cmdargs.engine)
 
     store_stats(contentsFile)
-    print(" Statistics are stored in "+ CONFIG["statistics"]["path"] + " folder")
+    print(" Statistics will be stored in "+ CONFIG["statistics"]["path"] + " folder")
 
+    print_results(stats)
+    '''
     print("\n Here the 10 most used packages for the file: " + contentsFile.name \
           + "\n-----------------------------"\
           + "\n" + str(stats)
           + "-----------------------------")
-
+    '''
     # plot_results(stats)
