@@ -1,4 +1,3 @@
-
 arch:
   - amd64
   - arm64
@@ -30,3 +29,4 @@ statistics:
   path: "statistics"
   cache: "cache"
   prefix: "statistics_"
+  plot_folder: "plots"

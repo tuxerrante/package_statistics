@@ -16,6 +16,7 @@ class File:
     statistics = ""
     last_update_date = None
     creation_date = None
+    plot_file = None
 
     def __init__(self, cmdargs):
         self.arch = cmdargs.arch
@@ -56,6 +57,12 @@ class File:
     def set_creation_date(self, cd):
         self.creation_date = cd
 
+    def set_plot_file(self, csv_file):
+        self.plot_file = csv_file
+
+    def get_plot_file(self):
+        return self.plot_file
+
     def compute_stats(self, engine):
         """ Based on the type of engine it will compute the stats for the file
             bash: will run a fast external script, located in the lib folder
@@ -66,11 +73,12 @@ class File:
             file_path = self.name
             command = ["./lib/package_statistics.sh", file_path]
             bash_child = subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-
+            line_count = 1
             for line in iter(bash_child.stdout.readline, b''):
-                out_string = line.decode(sys.stdout.encoding)
+                out_string = "{:<4}".format(str(line_count)+". ") + line.decode(sys.stdout.encoding)
                 # sys.stdout.write(out_string)
                 self.statistics += out_string
+                line_count += 1
         else:
             # TODO: use pandas to compute big data files
             pass

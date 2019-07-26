@@ -1,2 +1,3 @@
 download/
 *.gz
+__pycache__
