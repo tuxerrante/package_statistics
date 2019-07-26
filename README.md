@@ -26,13 +26,18 @@ with the file name. In this way in the next run the script can detect
 if computing power and user time can be saved. 
 
 ### Plotting
+```
+$ python package_statistics.py udeb-i386 --engine=bash --showPlot
+```
+
 After statistics has been computed or found in cache a plot will be 
 elaborated and stored in the plot dir.
+If the `--showPlot` is given it will be also shown.
+ 
  
 ## Known Issues
-- try/catches on https connections and I/O streams
-- hardcoded strings
+- Try/catches on https connections and I/O streams
+- Hardcoded strings
 
 ## TODO
 - double engine: Python and Bash
-- a lot of ugly hardcoded code should be cleaned

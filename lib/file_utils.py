@@ -1,15 +1,81 @@
 import gzip
 import os
+import re
 
+import numpy as np
 import requests
 import yaml
-
-# ------
-# CONFIG = None
-# ------
+from matplotlib import pyplot as plt
+from matplotlib.pyplot import figure
 
 with open('config/config.yaml', mode='r') as configFile:
     CONFIG = yaml.load(configFile, Loader=yaml.Loader)
+
+
+def plot_results(contentsFile, showPlot):
+    """ plot the results in a shiny bar chart
+
+    :param contentsFile: file object
+    :return:
+    """
+    csv_file = os.path.join(CONFIG["statistics"]["plot_folder"], CONFIG["statistics"]["prefix"]
+                            + contentsFile.get_name() +"_"
+                            + contentsFile.get_creation_date()
+                            + ".csv")
+    print(" Searching for plot data in "+ csv_file)
+
+    try:
+        with open(csv_file) as csv_in:
+            data = [line.strip().split(',') for line in csv_in]
+    except IOError:
+        print(" No plot data is available.")
+        return
+    except Exception as e:
+        print(str(e))
+        return
+
+    # names are too long and in reverse order:
+    packages  = list(reversed([t[0] for t in data]))
+    packages  = [p.split("/")[1] for p in packages]
+    packages  = [''] + packages
+    # 0 needs to be added
+    files_num = list(reversed([t[1] for t in data]))
+    files_num = ['0'] + files_num
+    # preparing the horizontal bar chart
+    figure(num=None, figsize=(9, 6), dpi=80, facecolor='w', edgecolor='k')
+    plt.barh(np.arange(len(packages)), files_num, align='center')
+    plt.yticks(np.arange(len(packages)), packages)
+    plt.subplots_adjust(left=0.3)
+    plt.title(" Most used packages")
+    plt.savefig(csv_file[:-3]+"png", bbox_inches='tight', dpi=100)
+    print(" Plot saved")
+    # maybe is too annoying to show the plot without asking, let's just save it
+    if showPlot:
+        plt.show()
+
+
+def store_stats(contentsFile):
+    """
+    Repo time format: 03-Jul-2019 14:16
+
+    :param contentsFile:
+    :return:
+    """
+    filename = contentsFile.get_name().split("/")[1]
+    out_file_name = os.path.join(CONFIG["statistics"]["path"], CONFIG["statistics"]["prefix"] + filename)
+
+    out_file_name_csv = os.path.join(CONFIG["statistics"]["plot_folder"], CONFIG["statistics"]["prefix"] + filename + ".csv")
+    stats = contentsFile.get_stats()
+    stats_csv = stats.replace("\t", ",")
+    stats_csv = re.sub(r'^[0-9]+\.\s+', "", stats_csv, flags=re.MULTILINE)
+
+    with open(out_file_name, mode='w') as f:
+        f.write(stats)
+
+    with open(out_file_name_csv, mode='w') as csv:
+        csv.write(stats_csv)
+
+    contentsFile.set_plot_file(out_file_name_csv)
 
 
 def download_file(contentsFile):
