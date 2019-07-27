@@ -33,15 +33,16 @@ def define_arguments():
 
 
 def print_results(stats, isFile=False):
+    useless_bar = '-'*50
     print("\n Here the 10 most used packages for the file: " + contentsFile.name \
-          + "\n----------------------------------------")
+          + "\n" + useless_bar)
     if isFile:
         with open(stats_file) as f:
             for line in f:
                 print(line, end='')
     else:
         print(stats)
-    print("----------------------------------------\n")
+    print(useless_bar + "\n")
 
 
 #################################

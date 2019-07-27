@@ -16,13 +16,15 @@ def plot_results(contentsFile, showPlot):
     """ plot the results in a shiny bar chart
 
     :param contentsFile: file object
-    :return:
     """
+    filename = contentsFile.get_name().split("/")[1]
     csv_file = os.path.join(CONFIG["statistics"]["plot_folder"], CONFIG["statistics"]["prefix"]
-                            + contentsFile.get_name() +"_"
-                            + contentsFile.get_creation_date()
+                            + filename
                             + ".csv")
     # print(" Searching for plot data in "+ csv_file)
+    if os.path.isfile(csv_file[:-3]+"png"):
+        print(" The graph was already in the plot folder.")
+        return
 
     try:
         with open(csv_file) as csv_in:
@@ -64,7 +66,8 @@ def store_stats(contentsFile):
     filename = contentsFile.get_name().split("/")[1]
     out_file_name = os.path.join(CONFIG["statistics"]["path"], CONFIG["statistics"]["prefix"] + filename)
 
-    out_file_name_csv = os.path.join(CONFIG["statistics"]["plot_folder"], CONFIG["statistics"]["prefix"] + filename + ".csv")
+    out_file_name_csv = os.path.join(CONFIG["statistics"]["plot_folder"], CONFIG["statistics"]["prefix"]
+                                     + filename + ".csv")
     stats = contentsFile.get_stats()
     stats_csv = stats.replace("\t", ",")
     stats_csv = re.sub(r'^[0-9]+\.\s+', "", stats_csv, flags=re.MULTILINE)
