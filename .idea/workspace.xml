@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db834c43-bb23-43d1-9ae0-0e94f93e1639" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/file_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/file_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/statistics_engine.sh" beforeDir="false" afterPath="$PROJECT_DIR$/lib/statistics_engine.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package_statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/package_statistics.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -192,8 +188,18 @@
       <option name="project" value="LOCAL" />
       <updated>1564229081169</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="documentation">
+      <created>1564231854867</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1564231854867</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -217,7 +223,8 @@
     <MESSAGE value="fixed: plot function not finding csv at first run" />
     <MESSAGE value="stats output formatting. Fixed remote_file saving filename." />
     <MESSAGE value="reformat and cleaning" />
-    <option name="LAST_COMMIT_MESSAGE" value="reformat and cleaning" />
+    <MESSAGE value="documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="documentation" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
