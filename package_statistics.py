@@ -27,10 +27,11 @@ def define_arguments():
     parser.add_argument('--engine', dest='engine', type=str,
                         choices=['python', 'bash'],
                         default='python',
-                        help="The core module computing the statistics can be a bash script" \
+                        help="the core module computing the statistics can be a bash script" \
                              "or a Python one.")
     parser.add_argument('--clear', default=False, action='store_true')
-    parser.add_argument('--showPlot', default=False, action='store_true')
+    parser.add_argument('--showPlot', default=False, action='store_true',
+                        help="show the plot at the end of the script executio")
     cmdargs = parser.parse_args()
 
 

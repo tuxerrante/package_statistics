@@ -164,7 +164,7 @@ def extract_archive(contentsFile):
     archive_path  = Path(contentsFile.get_archive_name())
 
     out_file_name = CONFIG["downloadFolder"]+"/"+archive_path.stem
-    print(" Extracting "+str(archive_path)+" in "+str(out_file_name))
+    # print(" Extracting "+str(archive_path)+" in "+str(out_file_name))
     contentsFile.set_name(Path(out_file_name))
 
     with gzip.open(archive_path, 'rb') as infile:

@@ -90,7 +90,6 @@ jury reaction to a bash engine for a python homework.
 Another reason is that I wanted to use some of the most modern python
 features like Collections Counter, lambda functions and so on.
 
-So I would say I spent **around 20 hours** for all the application, it is hard
-to say since I worked on it also during my job hours between tasks. 
+So I would say I spent **around 20 hours** for all the application. 
 
 I used PyCharm Community 2019.2 as IDE on Ubuntu 19.04.
