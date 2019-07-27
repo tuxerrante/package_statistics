@@ -15,6 +15,7 @@ with open('config/config.yaml', mode='r') as configFile:
 def plot_results(contentsFile, showPlot):
     """ plot the results in a shiny bar chart
 
+    :param showPlot: bool to chech if the plot would be shown
     :param contentsFile: file object
     """
 
@@ -88,8 +89,8 @@ def store_stats(contentsFile):
 def download_file(contentsFile):
     """
     Streaming is needed to download big files
-    :param the file object instance
-    :return:
+    :param contentsFile:
+    :return: filename
     """
     url = CONFIG["repo"]["url"] + contentsFile.get_archive_name()
     creation_date = contentsFile.get_creation_date()
@@ -155,11 +156,10 @@ def check_remote_file(contentsFile):
 def extract_archive(contentsFile):
     """
     Extract the gzipped archive in a file with same name without extension
-    :param archive_name:
+    :param contentsFile:
     :return:
     """
     archive_path  = contentsFile.get_archive_name()
-    creation_date = contentsFile.get_creation_date()
 
     # archive_path  = os.path.join(CONFIG["downloadFolder"], archive_name +"_"+ creation_date)
     out_file_name = archive_path[:-3]

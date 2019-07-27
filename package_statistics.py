@@ -10,11 +10,11 @@ import yaml
 from lib import File
 from lib import file_utils
 
-cmdargs = None
-
 with open('config/config.yaml', mode='r') as configFile:
     CONFIG = yaml.load(configFile, Loader=yaml.Loader)
     # print(CONFIG)
+
+cmdargs = None
 
 
 def define_arguments():
@@ -36,7 +36,7 @@ def define_arguments():
 
 
 def print_results(stats, isFile=False):
-    useless_bar = '-'*70
+    useless_bar = '-' * 70
     print("\n Here the 10 most used packages for the file: " + contentsFile.name \
           + "\n" + useless_bar)
     if isFile:
@@ -49,21 +49,20 @@ def print_results(stats, isFile=False):
 
 
 #################################
-###     MAIN                   ##
+#      MAIN                   ##
 ################################
 if __name__ == '__main__':
-    print
     define_arguments()
 
     contentsFile = File.File(cmdargs)
     print(" Architecture was set to " + contentsFile.get_arch())
-    print(" Repository URL is: "      + contentsFile.get_url())
+    print(" Repository URL is: " + contentsFile.get_url())
 
     # clear all artifacts
     if cmdargs.clear:
         print(" Cleaning old files..")
         plot_list = Path(CONFIG["statistics"]["plot_folder"]).glob("*.png")
-        csv_list  = Path(CONFIG["statistics"]["plot_folder"]).glob("*.csv")
+        csv_list = Path(CONFIG["statistics"]["plot_folder"]).glob("*.csv")
         stat_list = Path(CONFIG["statistics"]["folder"]).glob("statistics_*")
         for file in itertools.chain(plot_list, csv_list, stat_list):
             file.unlink()
@@ -77,7 +76,7 @@ if __name__ == '__main__':
         file_utils.plot_results(contentsFile, cmdargs.showPlot)
         sys.exit()
 
-    print(" Downloading file "+ contentsFile.get_name() +" ..")
+    print(" Downloading file " + contentsFile.get_name() + " ..")
     file_utils.download_file(contentsFile)
     print(" File downloaded")
 
@@ -89,7 +88,7 @@ if __name__ == '__main__':
     stats = contentsFile.compute_stats(cmdargs.engine)
 
     file_utils.store_stats(contentsFile)
-    print(" Statistics will be stored in "+ CONFIG["statistics"]["folder"] + " folder")
+    print(" Statistics will be stored in " + CONFIG["statistics"]["folder"] + " folder")
 
     print_results(stats)
 

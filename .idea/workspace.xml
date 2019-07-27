@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db834c43-bb23-43d1-9ae0-0e94f93e1639" name="Default Changelist" comment="    fixed: plot function not finding csv at first run">
+    <list default="true" id="db834c43-bb23-43d1-9ae0-0e94f93e1639" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/File.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/File.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/file_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/file_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/statistcs_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/statistcs_engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/statistics_engine.sh" beforeDir="false" afterPath="$PROJECT_DIR$/lib/statistics_engine.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package_statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/package_statistics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/statistics_Contents-i386_03-Jul-2019_1416.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/statistics_Contents-i386_03-Jul-2019_1416.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/statistics_Contents-udeb-amd64_23-Jun-2019_0758.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics/statistics_Contents-amd64_03-Jul-2019_1416" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics/statistics_Contents-i386_03-Jul-2019_1416" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics/statistics_Contents-udeb-amd64_23-Jun-2019_0758" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics/statistics_Contents-udeb-i386_23-Jun-2019_0758" beforeDir="false" afterPath="$PROJECT_DIR$/statistics/statistics_Contents-udeb-i386_23-Jun-2019_0758" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +28,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -186,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564220405191</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="stats output formatting. Fixed remote_file saving filename.">
+      <created>1564228501285</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1564228501285</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,7 +205,8 @@
     <MESSAGE value="minor fixes" />
     <MESSAGE value="The python engine is here!" />
     <MESSAGE value="fixed: plot function not finding csv at first run" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed: plot function not finding csv at first run" />
+    <MESSAGE value="stats output formatting. Fixed remote_file saving filename." />
+    <option name="LAST_COMMIT_MESSAGE" value="stats output formatting. Fixed remote_file saving filename." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
