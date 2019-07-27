@@ -81,7 +81,7 @@ class File:
         file_path = CONFIG["downloadFolder"]+"/"+self.filename_path.name
 
         if engine == 'bash':
-            command = [str(Path("bash ./lib/statistics_engine.sh")), file_path]
+            command = [str(Path("./lib/statistics_engine.sh")), file_path]
             bash_child = subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
             line_count = 1
             for line in iter(bash_child.stdout.readline, b''):
