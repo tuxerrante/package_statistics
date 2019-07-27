@@ -157,7 +157,7 @@ def extract_archive(contentsFile):
     """
     Extract the gzipped archive in a file with same name without extension
     :param contentsFile:
-    :return:
+    :return: True if it completes successfully
     """
     archive_path  = contentsFile.get_archive_name()
 

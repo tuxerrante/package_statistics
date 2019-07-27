@@ -12,7 +12,6 @@ from lib import file_utils
 
 with open('config/config.yaml', mode='r') as configFile:
     CONFIG = yaml.load(configFile, Loader=yaml.Loader)
-    # print(CONFIG)
 
 cmdargs = None
 
@@ -62,7 +61,7 @@ if __name__ == '__main__':
     if cmdargs.clear:
         print(" Cleaning old files..")
         plot_list = Path(CONFIG["statistics"]["plot_folder"]).glob("*.png")
-        csv_list = Path(CONFIG["statistics"]["plot_folder"]).glob("*.csv")
+        csv_list  = Path(CONFIG["statistics"]["plot_folder"]).glob("*.csv")
         stat_list = Path(CONFIG["statistics"]["folder"]).glob("statistics_*")
         for file in itertools.chain(plot_list, csv_list, stat_list):
             file.unlink()
