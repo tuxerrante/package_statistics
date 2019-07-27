@@ -1,6 +1,6 @@
 import gzip
-import os
 import re
+from pathlib import Path
 
 import numpy as np
 import requests
@@ -8,7 +8,7 @@ import yaml
 from matplotlib import pyplot as plt
 from matplotlib.pyplot import figure
 
-with open('config/config.yaml', mode='r') as configFile:
+with open(Path("config/config.yaml"), mode='r') as configFile:
     CONFIG = yaml.load(configFile, Loader=yaml.Loader)
 
 
@@ -19,13 +19,15 @@ def plot_results(contentsFile, showPlot):
     :param contentsFile: file object
     """
 
-    filename = contentsFile.get_name().split("/")[1]
+    try:
+        filename = contentsFile.get_filename_path().name
+    except:
+        filename = contentsFile.get_filename_path()
 
-    csv_file = os.path.join(CONFIG["statistics"]["plot_folder"], CONFIG["statistics"]["prefix"]
-                            + filename
-                            + ".csv")
+    csv_file = Path(CONFIG["statistics"]["plot_folder"] +"/"+ CONFIG["statistics"]["prefix"]
+                            + filename + ".csv")
     # print(" Searching for plot data in "+ csv_file)
-    if os.path.isfile(csv_file[:-3]+"png"):
+    if Path(csv_file.stem + ".png").exists():
         print(" The graph was already in the plot folder.")
         return
 
@@ -52,7 +54,7 @@ def plot_results(contentsFile, showPlot):
     plt.yticks(np.arange(len(packages)), packages)
     plt.subplots_adjust(left=0.3)
     plt.title(" Most used packages")
-    plt.savefig(csv_file[:-3]+"png", bbox_inches='tight', dpi=100)
+    plt.savefig(CONFIG["statistics"]["plot_folder"]+"/"+csv_file.stem + ".png", bbox_inches='tight', dpi=100)
     print(" Plot saved")
     # maybe is too annoying to show the plot without asking, let's just save it
     if showPlot:
@@ -66,11 +68,11 @@ def store_stats(contentsFile):
     :param contentsFile: the file object
     :return:
     """
-    filename = contentsFile.get_name().split("/")[1]
-    out_file_name = os.path.join(CONFIG["statistics"]["folder"], CONFIG["statistics"]["prefix"] + filename)
+    filename = contentsFile.get_filename_path().name
+    out_file_name = CONFIG["statistics"]["folder"] +"/"+ CONFIG["statistics"]["prefix"] + filename
 
-    out_file_name_csv = os.path.join(CONFIG["statistics"]["plot_folder"], CONFIG["statistics"]["prefix"]
-                                     + filename + ".csv")
+    out_file_name_csv = CONFIG["statistics"]["plot_folder"] +"/"+ CONFIG["statistics"]["prefix"] +\
+                                     filename + ".csv"
     stats = contentsFile.get_stats()
     # results file contains a double tab if coming from bash
     #   or multiple spacing if coming from python engine
@@ -92,14 +94,15 @@ def download_file(contentsFile):
     :param contentsFile:
     :return: filename
     """
-    url = CONFIG["repo"]["url"] + contentsFile.get_archive_name()
+    url = CONFIG["repo"]["url"] + contentsFile.get_archive_name().name
     creation_date = contentsFile.get_creation_date()
 
-    local_archive_name = os.path.join("download", url.split('/')[-1])[:-3] +"_"+ creation_date + ".gz"
+    local_archive_name = "download/"+ url.split("/")[-1][:-3] +"_"+ creation_date + ".gz"
+    #local_archive_name = Path(local_archive_name)
 
     contentsFile.set_creation_date(creation_date)
     contentsFile.set_archive_name(local_archive_name)
-    contentsFile.set_name(local_archive_name)
+    contentsFile.set_name(Path(local_archive_name))
 
     with requests.get(url, stream=True) as r:
         r.raise_for_status()
@@ -121,7 +124,7 @@ def check_remote_file(contentsFile):
     :param contentsFile: the file object
     :return: stats file or None
     """
-    archive_name = contentsFile.get_archive_name()
+    archive_name = contentsFile.get_archive_name().name
 
     http_response = requests.get("http://ftp.uk.debian.org/debian/dists/stable/main/")
     resp_text = http_response.text
@@ -134,20 +137,19 @@ def check_remote_file(contentsFile):
     # This will be used by the download function for naming the file uniquely
     contentsFile.set_creation_date(creation_date_clean)
     contentsFile.set_name(
-        os.path.join(
-            CONFIG["downloadFolder"],
-            archive_name[:-3] + "_" + creation_date_clean
-        )
-    )
+            Path(
+                CONFIG["downloadFolder"]+"/"+
+                Path(archive_name).stem + "_" + creation_date_clean
+            ))
 
     # stats_filename = os.path.join(CONFIG["statistics"]["folder"], archive_name +"_"+ creation_date_clean)
-    stats_filename = os.path.join(
-        CONFIG["statistics"]["folder"],
-        CONFIG["statistics"]["prefix"] +
-        archive_name[:-3] + "_" +
-        creation_date_clean)
+    stats_filename = Path(CONFIG["statistics"]["folder"] + "/" +\
+                        CONFIG["statistics"]["prefix"] +\
+                        archive_name[:-3] + "_" +\
+                        creation_date_clean
+                          )
 
-    if os.path.isfile(stats_filename):
+    if stats_filename.exists():
         return stats_filename
     else:
         return None
@@ -159,11 +161,11 @@ def extract_archive(contentsFile):
     :param contentsFile:
     :return: True if it completes successfully
     """
-    archive_path  = contentsFile.get_archive_name()
+    archive_path  = Path(contentsFile.get_archive_name())
 
-    # archive_path  = os.path.join(CONFIG["downloadFolder"], archive_name +"_"+ creation_date)
-    out_file_name = archive_path[:-3]
-    contentsFile.set_name(out_file_name)
+    out_file_name = CONFIG["downloadFolder"]+"/"+archive_path.stem
+    print(" Extracting "+str(archive_path)+" in "+str(out_file_name))
+    contentsFile.set_name(Path(out_file_name))
 
     with gzip.open(archive_path, 'rb') as infile:
             with open(out_file_name, 'wb') as outfile:

@@ -1,11 +1,12 @@
 import subprocess
 import sys
+from pathlib import Path
 
 import yaml
 
 from lib import statistcs_engine
 
-with open('config/config.yaml', mode='r') as configFile:
+with open(Path("config/config.yaml"), mode='r') as configFile:
     CONFIG = yaml.load(configFile, Loader=yaml.Loader)
     # print(CONFIG)
 
@@ -16,9 +17,9 @@ class File:
     """
     arch = None
     repo = None
-    name = None
-    archive_name = None
-    statistics = ""
+    filename_path = None
+    archive_name  = None
+    statistics    = ""
     last_update_date = None
     creation_date = None
     plot_file = None
@@ -26,8 +27,8 @@ class File:
     def __init__(self, cmdargs):
         self.arch = cmdargs.arch
         self.repo = CONFIG["repo"]["url"]
-        self.name = "Contents-" + self.arch
-        self.archive_name   = self.name + ".gz"
+        self.filename_path  = Path("Contents-" + self.arch)
+        self.archive_name   = Path(self.filename_path.name + ".gz")
         self.file_directory = "download"
         self.statistics     = ""
         self.last_update_date = None
@@ -50,14 +51,17 @@ class File:
     def get_stats(self):
         return self.statistics
 
-    def get_name(self):
-        return self.name
+    def get_filename_path(self):
+        return self.filename_path
 
     def set_archive_name(self, an):
         self.archive_name = an
 
     def set_name(self, n):
-        self.name = n
+        if not isinstance(n, Path):
+            raise TypeError(" Store only paths as objects. Tried to store "+ n + " of type "+ str(type(n)))
+
+        self.filename_path = n
 
     def set_creation_date(self, cd):
         self.creation_date = cd
@@ -74,11 +78,10 @@ class File:
             python: should elaborate in a more pythonic and modern way
         :return: the statistics as a string
         """
-        file_path = self.name
+        file_path = CONFIG["downloadFolder"]+"/"+self.filename_path.name
 
         if engine == 'bash':
-
-            command = ["./lib/statistics_engine.sh", file_path]
+            command = [str(Path("bash ./lib/statistics_engine.sh")), file_path]
             bash_child = subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
             line_count = 1
             for line in iter(bash_child.stdout.readline, b''):

@@ -3,8 +3,8 @@ debian-installer/xkb-data-udeb,291
 debian-installer/ca-certificates-udeb,257
 debian-installer/libwacom-common-udeb,256
 debian-installer/espeak-ng-data-udeb,240
-debian-installer/sound-modules-4.19.0-5-686-pae-di,236
-debian-installer/sound-modules-4.19.0-5-686-di,235
 debian-installer/fonts-noto-unhinted-udeb,215
+debian-installer/kernel-image-4.19.0-5-arm64-di,191
+debian-installer/nic-modules-4.19.0-5-arm64-di,177
 debian-installer/espeak-data-udeb,162
-debian-installer/nic-modules-4.19.0-5-686-pae-di,148
+debian-installer/console-keymaps-at,128

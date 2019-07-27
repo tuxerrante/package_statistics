@@ -1,4 +1,9 @@
 ## Readme
+
+#### Dependencies
+`pip install numpy pyyaml matplotlib`
+
+
 ### Statistics Calculation
 The core of the application is a script to compute the 10 most used 
 packages per architecture.  
@@ -52,8 +57,8 @@ Using the `--clear` argument you can be sure to not use ant cached
 file and to download the online repo.
  
 ## Known Issues
+- The bash engine doesn't work on Windows
 - Try/catches on https connections and I/O streams
-- Hardcoded strings
 - Bash output is ugly
 - Sometimes [a warning](https://gitlab.gnome.org/GNOME/glib/commit/a919be3d39150328874ff647fb2c2be7af3df996) is shown from glib
 

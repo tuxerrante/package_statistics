@@ -1,4 +1,5 @@
 from collections import Counter
+from pathlib import Path
 
 
 def compute_stats(file_path):
@@ -39,4 +40,4 @@ def compute_stats(file_path):
 
 # --- For testing
 if __name__ == '__main__':
-    compute_stats("../download/Contents-udeb-i386_23-Jun-2019_0758")
+    compute_stats(Path("../download/Contents-udeb-i386_23-Jun-2019_0758"))

@@ -10,7 +10,7 @@ import yaml
 from lib import File
 from lib import file_utils
 
-with open('config/config.yaml', mode='r') as configFile:
+with open(Path("config/config.yaml"), mode='r') as configFile:
     CONFIG = yaml.load(configFile, Loader=yaml.Loader)
 
 cmdargs = None
@@ -36,7 +36,7 @@ def define_arguments():
 
 def print_results(stats, isFile=False):
     useless_bar = '-' * 70
-    print("\n Here the 10 most used packages for the file: " + contentsFile.name \
+    print("\n Here the 10 most used packages for the file: " + contentsFile.filename_path.name \
           + "\n" + useless_bar)
     if isFile:
         with open(stats_file) as f:
@@ -63,7 +63,8 @@ if __name__ == '__main__':
         plot_list = Path(CONFIG["statistics"]["plot_folder"]).glob("*.png")
         csv_list  = Path(CONFIG["statistics"]["plot_folder"]).glob("*.csv")
         stat_list = Path(CONFIG["statistics"]["folder"]).glob("statistics_*")
-        for file in itertools.chain(plot_list, csv_list, stat_list):
+        down_list = Path(CONFIG["downloadFolder"]).glob("*")
+        for file in itertools.chain(plot_list, csv_list, stat_list, down_list):
             file.unlink()
 
     # check repo metadata to avoid downloading the same file twice
@@ -75,7 +76,7 @@ if __name__ == '__main__':
         file_utils.plot_results(contentsFile, cmdargs.showPlot)
         sys.exit()
 
-    print(" Downloading file " + contentsFile.get_name() + " ..")
+    print(" Downloading file " + contentsFile.get_filename_path().name + " ..")
     file_utils.download_file(contentsFile)
     print(" File downloaded")
 
