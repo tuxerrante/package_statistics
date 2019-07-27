@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import argparse
+import itertools
 import sys
+from pathlib import Path
 
 import yaml
 
@@ -28,12 +30,13 @@ def define_arguments():
                         default='python',
                         help="The core module computing the statistics can be a bash script" \
                              "or a Python one.")
+    parser.add_argument('--clear', default=False, action='store_true')
     parser.add_argument('--showPlot', default=False, action='store_true')
     cmdargs = parser.parse_args()
 
 
 def print_results(stats, isFile=False):
-    useless_bar = '-'*50
+    useless_bar = '-'*70
     print("\n Here the 10 most used packages for the file: " + contentsFile.name \
           + "\n" + useless_bar)
     if isFile:
@@ -56,6 +59,15 @@ if __name__ == '__main__':
     print(" Architecture was set to " + contentsFile.get_arch())
     print(" Repository URL is: "      + contentsFile.get_url())
 
+    # clear all artifacts
+    if cmdargs.clear:
+        print(" Cleaning old files..")
+        plot_list = Path(CONFIG["statistics"]["plot_folder"]).glob("*.png")
+        csv_list  = Path(CONFIG["statistics"]["plot_folder"]).glob("*.csv")
+        stat_list = Path(CONFIG["statistics"]["folder"]).glob("statistics_*")
+        for file in itertools.chain(plot_list, csv_list, stat_list):
+            file.unlink()
+
     # check repo metadata to avoid downloading the same file twice
     stats_file = file_utils.check_remote_file(contentsFile)
 
@@ -77,7 +89,7 @@ if __name__ == '__main__':
     stats = contentsFile.compute_stats(cmdargs.engine)
 
     file_utils.store_stats(contentsFile)
-    print(" Statistics will be stored in "+ CONFIG["statistics"]["path"] + " folder")
+    print(" Statistics will be stored in "+ CONFIG["statistics"]["folder"] + " folder")
 
     print_results(stats)
 

@@ -34,6 +34,12 @@ After statistics has been computed or found in cache a plot will be
 elaborated and stored in the plot dir.
 If the `--showPlot` is given it will be also shown.
  
+### Clean run
+```
+$ python package_statistics.py --clear --engine=python i386
+```
+Using the `--clear` argument you can be sure to not use ant cached
+file and to download the online repo.
  
 ## Known Issues
 - Try/catches on https connections and I/O streams

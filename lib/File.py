@@ -11,6 +11,9 @@ with open('config/config.yaml', mode='r') as configFile:
 
 
 class File:
+    """ class used to store attributes and methods of the downloaded archive
+    @:var name will contain also the path of the extracted file
+    """
     arch = None
     repo = None
     name = None

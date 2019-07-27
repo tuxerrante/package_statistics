@@ -6,7 +6,7 @@
 # remove repetitions, case insensitive
 # 	sort | uniq -cdi
 
-awk '{print $2}' $1 | egrep -o "[/.a-zA-Z0-9_-]+" | sort | uniq -cdi | sort -nr | awk 'BEGIN{i=0} { if (i<10){ print $2 "\t" $1; i++;} }'
+awk '{print $2}' $1 | egrep -o "[/.a-zA-Z0-9_-]+" | sort | uniq -cdi | sort -nr | awk 'BEGIN{i=0} { if (i<10){ print $2 "\t\t" $1; i++;} }'
 
 : '
 RESPONSE ~ 27 sec for 6.040.275 lines

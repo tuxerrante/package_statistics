@@ -17,7 +17,9 @@ def plot_results(contentsFile, showPlot):
 
     :param contentsFile: file object
     """
+
     filename = contentsFile.get_name().split("/")[1]
+
     csv_file = os.path.join(CONFIG["statistics"]["plot_folder"], CONFIG["statistics"]["prefix"]
                             + filename
                             + ".csv")
@@ -60,17 +62,19 @@ def store_stats(contentsFile):
     """
     Repo time format: 03-Jul-2019 14:16
 
-    :param contentsFile:
+    :param contentsFile: the file object
     :return:
     """
     filename = contentsFile.get_name().split("/")[1]
-    out_file_name = os.path.join(CONFIG["statistics"]["path"], CONFIG["statistics"]["prefix"] + filename)
+    out_file_name = os.path.join(CONFIG["statistics"]["folder"], CONFIG["statistics"]["prefix"] + filename)
 
     out_file_name_csv = os.path.join(CONFIG["statistics"]["plot_folder"], CONFIG["statistics"]["prefix"]
                                      + filename + ".csv")
     stats = contentsFile.get_stats()
-    stats_csv = stats.replace("\t", ",")
-    stats_csv = re.sub(r'^[0-9]+\.\s+', "", stats_csv, flags=re.MULTILINE)
+    # results file contains a double tab if coming from bash
+    #   or multiple spacing if coming from python engine
+    stats_csv = re.sub(r'^[0-9]+\.\s+', "", stats,    flags=re.MULTILINE)
+    stats_csv = re.sub(r'[^\S\r\n]+', ",",  stats_csv,flags=re.MULTILINE)
 
     with open(out_file_name, mode='w') as f:
         f.write(stats)
@@ -128,10 +132,16 @@ def check_remote_file(contentsFile):
 
     # This will be used by the download function for naming the file uniquely
     contentsFile.set_creation_date(creation_date_clean)
+    contentsFile.set_name(
+        os.path.join(
+            CONFIG["downloadFolder"],
+            archive_name[:-3] + "_" + creation_date_clean
+        )
+    )
 
-    # stats_filename = os.path.join(CONFIG["statistics"]["path"], archive_name +"_"+ creation_date_clean)
+    # stats_filename = os.path.join(CONFIG["statistics"]["folder"], archive_name +"_"+ creation_date_clean)
     stats_filename = os.path.join(
-        CONFIG["statistics"]["path"],
+        CONFIG["statistics"]["folder"],
         CONFIG["statistics"]["prefix"] +
         archive_name[:-3] + "_" +
         creation_date_clean)

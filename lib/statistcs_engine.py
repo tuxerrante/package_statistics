@@ -29,7 +29,8 @@ def compute_stats(file_path):
     stats_tmp = list(
         map(
             lambda x: "{:<4}".format(str(most_common.index(x) + 1) + ". ") +
-                      x[0] + "\t" + str(x[1]) + "\n",
+                      "{:<60}".format(x[0]) +
+                      str(x[1]) + "\n",
             most_common
         ))
     stats = ''.join(stats_tmp)
