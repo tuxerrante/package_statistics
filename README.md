@@ -59,7 +59,7 @@ I started searching a one line bash solution the evening of the
 same day, I spent an hour before to understand I misunderstood 
 specifications coming to a solution like this `$ awk 'BEGIN{ FS="," } { if (NF > max) {max=NF; line=$0}} END{ print line }' Contents-amd64_small`
 
-**~ 3h**: When at home I cleaned up a little the new bash solution coming to this
+**3h**: When at home I cleaned up a little the new bash solution coming to this
 ```
 # DON’T FORGET THE DOT
 awk '{print $2}' $1 | egrep -o "[/.a-zA-Z0-9_-]+" | sort | uniq -cdi | sort -nr | awk 'BEGIN{i=0} { if (i<10){ print $2 " " $1; i++;} }'
