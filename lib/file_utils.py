@@ -22,7 +22,7 @@ def plot_results(contentsFile, showPlot):
                             + contentsFile.get_name() +"_"
                             + contentsFile.get_creation_date()
                             + ".csv")
-    print(" Searching for plot data in "+ csv_file)
+    # print(" Searching for plot data in "+ csv_file)
 
     try:
         with open(csv_file) as csv_in:

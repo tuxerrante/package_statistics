@@ -3,6 +3,8 @@ import sys
 
 import yaml
 
+from lib import statistcs_engine
+
 with open('config/config.yaml', mode='r') as configFile:
     CONFIG = yaml.load(configFile, Loader=yaml.Loader)
     # print(CONFIG)
@@ -69,9 +71,11 @@ class File:
             python: should elaborate in a more pythonic and modern way
         :return: the statistics as a string
         """
+        file_path = self.name
+
         if engine == 'bash':
-            file_path = self.name
-            command = ["./lib/package_statistics.sh", file_path]
+
+            command = ["./lib/statistics_engine.sh", file_path]
             bash_child = subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
             line_count = 1
             for line in iter(bash_child.stdout.readline, b''):
@@ -80,8 +84,6 @@ class File:
                 self.statistics += out_string
                 line_count += 1
         else:
-            # TODO: use pandas to compute big data files
-            pass
-
+            self.statistics = statistcs_engine.compute_stats(file_path)
         return self.statistics
 
