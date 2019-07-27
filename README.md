@@ -26,6 +26,8 @@ A HTTP request will invoke the [Debian repo](http://ftp.uk.debian.org/debian/dis
 searching for the Contents-ARCH.gz file bsaed on the given argument.
 The acceptable archs are set in the config file.
 
+It uses a streming connection to deal with big files. 
+
 ### Caching
 > “If you love life, don’t waste time, for time is what life is made up of.” 
 
