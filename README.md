@@ -12,7 +12,7 @@ The core of the application is a script to compute the 10 most used
 packages per architecture.  
 The output will be of the format: 
 ```
-$ python package_statistics.py udeb-i386 --engine=bash
+$ python package_statistics.py udeb-i386
 
 ----------------------------------------
 1.  debian-installer/brltty-udeb        351
