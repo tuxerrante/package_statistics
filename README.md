@@ -64,7 +64,7 @@ If the `--showPlot` is given it will be also shown.
  
 ### Clean run
 ```
-$ python package_statistics.py --clear i386git
+$ python package_statistics.py --clear i386
 ```
 Using the `--clear` argument you can be sure to not use ant cached
 file and to download the online repo.
