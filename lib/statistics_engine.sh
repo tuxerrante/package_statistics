@@ -6,7 +6,11 @@
 # remove repetitions, case insensitive
 # 	sort | uniq -cdi
 
-awk '{print $2}' "$1" | grep -Eo "[/.a-zA-Z0-9_-]+" | sort | uniq -cdi | sort -nr | awk 'BEGIN{i=0} { if (i<10){ print $2 "\t\t" $1; i++;} }'
+## MAC
+# usage: uniq [-c | -d | -u] [-i] [-f fields] [-s chars] [input [output]]
+
+
+awk '{print $2}' "$1" | grep -Eo "[/.a-zA-Z0-9_-]+" | sort | uniq -ci | sort -nr | awk 'BEGIN{i=0} { if (i<10){ print $2 "\t\t" $1; i++;} }'
 
 
 

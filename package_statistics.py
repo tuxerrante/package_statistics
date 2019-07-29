@@ -52,6 +52,7 @@ def print_results(stats, isFile=False):
 #      MAIN                   ##
 ################################
 if __name__ == '__main__':
+    print("\n")
     define_arguments()
 
     contentsFile = File.File(cmdargs)
@@ -94,3 +95,4 @@ if __name__ == '__main__':
     print_results(stats)
 
     file_utils.plot_results(contentsFile, cmdargs.showPlot)
+    print("\n")

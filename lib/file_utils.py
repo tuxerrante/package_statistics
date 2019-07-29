@@ -19,14 +19,10 @@ def plot_results(contentsFile, showPlot):
     :param contentsFile: file object
     """
 
-    try:
-        filename = contentsFile.get_filename_path().name
-    except:
-        filename = contentsFile.get_filename_path()
+    filename = contentsFile.get_filename_path().name
 
     csv_file = Path(CONFIG["statistics"]["plot_folder"] +"/"+ CONFIG["statistics"]["prefix"]
                             + filename + ".csv")
-    # print(" Searching for plot data in "+ csv_file)
     if Path(csv_file.stem + ".png").exists():
         print(" The graph was already in the plot folder.")
         return
@@ -43,8 +39,10 @@ def plot_results(contentsFile, showPlot):
 
     # names are too long and in reverse order:
     packages  = list(reversed([t[0] for t in data]))
-    packages  = [p.split("/")[1] for p in packages]
+    if "/" in packages:
+        packages  = [p.split("/")[1] for p in packages]
     packages  = [''] + packages
+
     # 0 needs to be added
     files_num = list(reversed([t[1] for t in data]))
     files_num = ['0'] + files_num
@@ -98,7 +96,6 @@ def download_file(contentsFile):
     creation_date = contentsFile.get_creation_date()
 
     local_archive_name = "download/"+ url.split("/")[-1][:-3] +"_"+ creation_date + ".gz"
-    #local_archive_name = Path(local_archive_name)
 
     contentsFile.set_creation_date(creation_date)
     contentsFile.set_archive_name(local_archive_name)

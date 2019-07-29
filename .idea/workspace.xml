@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db834c43-bb23-43d1-9ae0-0e94f93e1639" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lib/File.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/File.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/file_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/file_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/statistics_engine.sh" beforeDir="false" afterPath="$PROJECT_DIR$/lib/statistics_engine.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package_statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/package_statistics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/statistics_Contents-udeb-i386_23-Jun-2019_0758.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/statistics_Contents-udeb-i386_23-Jun-2019_0758.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/statistics/statistics_Contents-udeb-i386_23-Jun-2019_0758" beforeDir="false" afterPath="$PROJECT_DIR$/statistics/statistics_Contents-udeb-i386_23-Jun-2019_0758" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
